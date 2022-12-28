@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Messaging = () => {
+const Banner = () => {
     return (
         <div>
-            messagin
+            banner
         </div>
     );
 };
 
-export default Messaging;
+export default Banner;
