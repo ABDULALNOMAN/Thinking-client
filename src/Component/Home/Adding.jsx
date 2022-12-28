@@ -36,12 +36,12 @@ const Adding = () => {
 
     }
     return (
-        <div className=''>
-            <form onSubmit={handleSubmit(handleDataGet)} className='w-10/12 mx-auto border p-10'>
-                <textarea type="text" {...register('text')} className="textarea textarea-secondary w-full text-black" placeholder="Bio"></textarea>
+        <div className='my-8'>
+            <form onSubmit={handleSubmit(handleDataGet)} className='md:w-10/12 w-11/12 mx-auto bg-blue-3 border p-10'>
+                <textarea type="text" {...register('text')} className="textarea w-full text-black bg-white" placeholder="Bio"></textarea>
                 <div>
-                    <input  type="file" {...register('file')} className="file-input file-input-bordered file-input-info w-full max-w-xs" />
-                    <button className='btn btn-primary'>submit</button>
+                    <input  type="file" {...register('file')} className=" mb:my-0 my-2 file-input bg-white text-black file-input-bordered file-input-info w-full max-w-xs" />
+                    <button className='btn btn-primary md:ml-2 md:w-20 w-full'>submit</button>
                 </div>
             </form>
         </div>

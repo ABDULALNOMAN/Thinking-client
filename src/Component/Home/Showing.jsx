@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Showingdata from './Showingdata';
 
 const Showing = () => {
@@ -13,10 +12,12 @@ const Showing = () => {
         }
     })
     return (
-        <div className='w-10/12 mx-auto'>
-            {
-                items.map(item=><Showingdata key={item._id} item={item}></Showingdata>)
-            }
+        <div>
+            <div className='md:w-10/12 w-11/12 mx-auto mb-8 bg-slate-300'>
+                {
+                    items.map(item=><Showingdata key={item._id} item={item}></Showingdata>)
+                }
+            </div>
         </div>
     );
 };

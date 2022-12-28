@@ -26,9 +26,8 @@ const Drawer = () => {
                 </div> 
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-                    <ul className="menu p-4 w-60 bg-base-100 text-base-content">
-                    {/* <!-- Sidebar content here --> */}
-                        {navbarData}
+                    <ul className="menu p-4 w-60 bg-blue-2 text-white">
+                        <p className='btn bg-cyan-400 text-white hover:bg-cyan-500 border-none'>{navbarData} </p>
                     </ul>
                 </div>
             </div>

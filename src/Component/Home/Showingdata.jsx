@@ -1,42 +1,46 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineLike,AiFillLike } from 'react-icons/ai';
+import { AiFillLike } from 'react-icons/ai';
 import { BiMessageDetail } from 'react-icons/bi';
+import { FaBeer } from 'react-icons/fa';
+import { TbListDetails } from 'react-icons/tb';
+
+
 const Showingdata = ({ item }) => {
-    const [liking, setLiking] = useState(false)
-    const [count,setCount]=useState(1)
     const { image, text, _id } = item
-    useEffect(() => {
-        if (liking) {
-          setCount(count+1)
-      }
-        else {
-            setCount(count-1)
-      }
-    },[liking])
-    console.log(count)
+    console.log(item)
     return (
         <div>
-            <div className='flex justify-between'>
-                <div className='flex items-center'>
-                    <img className='mr-2' src="" alt="image" />
-                    <p>name</p>
+            <div className='bg-slate-300'>
+                <div className=' flex justify-between h-12 items-center mx-2'>
+                    <div className='flex items-center'>
+                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src="" alt="image" />
+                        <p>name</p>
+                    </div>
+                    <i><FaBeer></FaBeer></i>
                 </div>
-                <p>icon</p>
             </div>
-            <div>
+            <p className='border-b-2 border-b-blue-2'></p>
+            <div className='text-black bg-slate-300 px-2 py-2'>
                 <p>{text}</p>
+                <p>sdfsdfdsfdsf</p>
+            </div>
+            <div className='bg-blue-2'>
                 <img src={image} alt="" />
             </div>
-            <div className='flex justify-around'>
+            <div className='flex justify-around py-2'>
                 <div className='flex items-center'>
-                    <i className='' onClick={() => setLiking(!liking)}>{liking ? <AiFillLike className='text-5xl bg-blue-600 rounded-full'></AiFillLike> : <AiOutlineLike className='text-5xl bg-blue-600 rounded-full'></AiOutlineLike>}</i><span className='text-xl'></span>
+                    <i className=''><AiFillLike className='text-2xl'></AiFillLike></i>
+                    <p>like</p>
                 </div>
-                <div className='flex items-center'>
-                    <i><BiMessageDetail className='text-3xl mr-1'></BiMessageDetail></i>
+                <label htmlFor="my-modal-6" className='flex items-center'>
+                    <i><BiMessageDetail className='text-2xl mr-1'></BiMessageDetail></i>
                     <p>comment</p>
+                </label>
+                <div className='flex items-center '>
+                    <Link to={`/another/${_id}`}><TbListDetails className='text-2xl mr-1'></TbListDetails></Link>
+                    <p>details</p>
                 </div>
-                <Link to={`/another/${_id}`}><button className='btn btn-primary'>details</button></Link>
             </div>
         </div>
     );
