@@ -13,10 +13,10 @@ const Drawer = () => {
         });
     }
     const navbarData = User?.email ?
-        <li onClick={handleSignOut}><a>signOut</a></li>
+        <li className='btn btn-sm rounded-xl  bg-cyan-400 text-white hover:bg-cyan-500 border-none w-full' onClick={handleSignOut}><a>signOut</a></li>
         :
-        <><li><Link to={'/login'}>Item 1</Link></li>
-        <li><Link to={'/register'}>Item 2</Link></li></>
+        <><Link to={'/login'}><li className='btn btn-sm bg-cyan-400 text-white rounded-xl  hover:bg-cyan-500 border-none w-full mb-2'>login</li></Link>
+        <Link to={'/register'}><li className='btn btn-sm rounded-xl bg-cyan-400 text-white hover:bg-cyan-500 border-none w-full'>register</li></Link></>
     return (
         <div>
             <div className="drawer drawer-mobile">
@@ -27,7 +27,7 @@ const Drawer = () => {
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
                     <ul className="menu p-4 w-60 bg-blue-2 text-white">
-                        <p className='btn bg-cyan-400 text-white hover:bg-cyan-500 border-none'>{navbarData} </p>
+                        {navbarData}
                     </ul>
                 </div>
             </div>
