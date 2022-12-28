@@ -5,6 +5,7 @@ import Login from '../Authentication/Login'
 import Register from '../Authentication/Register'
 import Media from '../Other/Media'
 import Another from '../Other/Another'
+import About from '../Other/About'
 
 
 
@@ -37,6 +38,11 @@ import Another from '../Other/Another'
                     const data = fetch(`http://localhost:5000/another/${params.id}`)
                     return data
                  }
+             },
+             {
+                path:"/about",
+                element:<About></About>,
+                loader:()=>fetch('http://localhost:5000/about')
              }
         ])
     }
