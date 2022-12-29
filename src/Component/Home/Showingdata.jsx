@@ -8,7 +8,7 @@ import { TbListDetails } from 'react-icons/tb';
 
 const Showingdata = ({ item }) => {
     const { image, text, _id,displayName,userImage } = item
-    return(
+    return (
         <div className=''>
             <div className='bg-slate-300 '>
                 <div className=' flex justify-between h-16 items-center mx-2'>

@@ -3,8 +3,10 @@ import React, {useContext} from 'react';
 import { CallContext } from '../Contexting/Context';
 import image from '../../assets/undraw_login_re_4vu2 (1).svg'
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit} = useForm()
     const { handleRegisteUser,handleUpdataeUser } = useContext(CallContext)
     const handleRegisterForm = (data) => {
@@ -20,7 +22,6 @@ const Register = () => {
             .then((result) =>{
                 const user = result.user;
                 console.log(user)
-                toast.success('signUP successfull')
                 if (user.uid) {
                     fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`,{
                         method:"POST",
@@ -44,8 +45,9 @@ const Register = () => {
     }
     const handleUserData = (userdata) => {
         handleUpdataeUser(userdata)
-        .then(result => {
-            const user = result.user;
+        .then(()=> {
+            toast.success('signUP successfull')
+            navigate('/')
             })
         .catch((err) => {
             console.log(err)

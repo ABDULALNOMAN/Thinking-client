@@ -7,14 +7,14 @@ import { TbListDetails } from 'react-icons/tb';
 
 const Another = () => {
     const datas = useLoaderData()
-    const {image,text,_id}=datas
+    const {image,text,_id,displayName,userImage}=datas
     return (
         <div className=' md:my-8 md:mx-8'>
             <div className='bg-slate-300'>
                 <div className=' flex justify-between h-16 items-center mx-2'>
                     <div className='flex items-center'>
-                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src="" alt="image" />
-                        <p>name</p>
+                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src={userImage} alt="image" />
+                        <p>{displayName}</p>
                     </div>
                     <i><FaBeer></FaBeer></i>
                 </div>

@@ -7,7 +7,7 @@ import { TbListDetails } from 'react-icons/tb';
 
 
 const Mediadata = ({ data ,setDataId }) => {
-    const { image, text,_id } = data
+    const { image, text,_id,displayName,userImage } = data
     const [liking, setLiking] = useState(false)
     const [count,setCount]=useState(1)
     useEffect(() => {
@@ -23,8 +23,8 @@ const Mediadata = ({ data ,setDataId }) => {
              <div className='bg-slate-300'>
                 <div className=' flex justify-between h-14 items-center mx-2'>
                     <div className='flex items-center'>
-                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src="" alt="image" />
-                        <p>name</p>
+                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src={userImage} alt="image" />
+                        <p>{displayName}</p>
                     </div>
                     <i><FaBeer></FaBeer></i>
                 </div>
