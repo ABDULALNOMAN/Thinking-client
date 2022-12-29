@@ -10,7 +10,8 @@ module.exports = {
         blue: {
           1:"#144272",
           2:'#205295',
-          3:'#9ec9ff'
+          3:'#9ec9ff',
+          4:"#01273d"
         } 
       },
       fontFamily:{

@@ -6,6 +6,7 @@ import Register from '../Authentication/Register'
 import Media from '../Other/Media'
 import Another from '../Other/Another'
 import About from '../Other/About'
+import Privetroute from '../Authentication/Privetroute'
 
 
 
@@ -33,7 +34,7 @@ import About from '../Other/About'
              },
              {
                  path:'/another/:id',
-                 element: <Another></Another>,
+                 element:<Another></Another>,
                  loader:({params}) => {
                     const data = fetch(`http://localhost:5000/another/${params.id}`)
                     return data

@@ -7,15 +7,15 @@ import { TbListDetails } from 'react-icons/tb';
 
 
 const Showingdata = ({ item }) => {
-    const { image, text, _id } = item
+    const { image, text, _id,displayName,userImage } = item
     console.log(item)
     return (
-        <div>
-            <div className='bg-slate-300'>
+        <div className=''>
+            <div className='bg-slate-300 '>
                 <div className=' flex justify-between h-16 items-center mx-2'>
                     <div className='flex items-center'>
-                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src="" alt="image" />
-                        <p>name</p>
+                        <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src={userImage} alt="image" />
+                        <p>{displayName}</p>
                     </div>
                     <i><FaBeer></FaBeer></i>
                 </div>
@@ -23,13 +23,12 @@ const Showingdata = ({ item }) => {
             <p className='border-b-2 border-b-blue-2'></p>
             <div className='text-black bg-slate-300 px-2 py-2'>
                 <p>{text}</p>
-                <p>sdfsdfdsfdsf</p>
             </div>
             <div className='bg-blue-2'>
                 <img src={image} alt="" />
             </div>
-            <div className='flex justify-around py-2 h-14'>
-                <div className='flex items-center'>
+            <div className='flex justify-around py-2 h-14 '>
+                <div className='flex items-center '>
                     <i className=''><AiFillLike className='text-2xl'></AiFillLike></i>
                     <p>like</p>
                 </div>
