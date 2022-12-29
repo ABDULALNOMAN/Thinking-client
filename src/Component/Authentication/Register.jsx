@@ -22,7 +22,7 @@ const Register = () => {
                 console.log(user)
                 toast.success('signUP successfull')
                 if (user.uid) {
-                    fetch(`https://api.imgbb.com/1/upload?key=408356244f0751ab0559a83c0ad89aaa`,{
+                    fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`,{
                         method:"POST",
                         body:formData
                     })

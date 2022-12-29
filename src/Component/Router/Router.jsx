@@ -1,13 +1,11 @@
-import {createBrowserRouter} from 'react-router-dom'
-import Main from '../Main/Main'
-import Home from '../Home/Home'
+import { createBrowserRouter } from 'react-router-dom'
 import Login from '../Authentication/Login'
 import Register from '../Authentication/Register'
-import Media from '../Other/Media'
-import Another from '../Other/Another'
+import Home from '../Home/Home'
+import Main from '../Main/Main'
 import About from '../Other/About'
-import Privetroute from '../Authentication/Privetroute'
-
+import Another from '../Other/Another'
+import Media from '../Other/Media'
 
 
  export const router = createBrowserRouter([
@@ -30,20 +28,19 @@ import Privetroute from '../Authentication/Privetroute'
              {
                  path: '/media',
                  element: <Media></Media>,
-                 loader:()=>fetch('http://localhost:5000/media')
+                 loader:()=>fetch('https://thinking-server.vercel.app/media')
              },
              {
                  path:'/another/:id',
                  element:<Another></Another>,
                  loader:({params}) => {
-                    const data = fetch(`http://localhost:5000/another/${params.id}`)
+                    const data = fetch(`https://thinking-server.vercel.app/another/${params.id}`)
                     return data
                  }
              },
              {
                 path:"/about",
-                element:<About></About>,
-                loader:()=>fetch('http://localhost:5000/about')
+                element: <About></About>,
              }
         ])
     }

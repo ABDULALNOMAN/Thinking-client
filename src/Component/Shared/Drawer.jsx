@@ -13,7 +13,8 @@ const Drawer = () => {
             });
     }
     const navbarData =<> 
-         <Link Link to= { '/'} > <li className='btn btn-sm bg-cyan-400 text-white rounded-xl  hover:bg-cyan-500 border-none w-full mb-2'>Home</li></Link>
+         <Link to={'/'} ><li className='btn btn-sm bg-cyan-400 text-white rounded-xl  hover:bg-cyan-500 border-none w-full mb-2'>Home</li></Link>
+         <Link to={'/about'} ><li className='btn btn-sm bg-cyan-400 text-white rounded-xl  hover:bg-cyan-500 border-none w-full mb-2'>about</li></Link>
         { User?.email ? <>
             <li className='btn btn-sm rounded-xl  bg-cyan-400 text-white hover:bg-cyan-500 border-none w-full mb-2' onClick={handleSignOut}><a>signOut</a></li>
             <Link to={'/media'}><li className='btn btn-sm bg-cyan-400 text-white rounded-xl  hover:bg-cyan-500 border-none w-full mb-2'>media</li></Link>

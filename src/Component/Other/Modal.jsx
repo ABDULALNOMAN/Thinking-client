@@ -1,45 +1,58 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
 
-const Modal = () => {
-    const { register, handleSubmit } = useForm()
-    const handleModalForm = (data) => {
-        console.log(data)
-    }
+const Modal = ({items,register,handleSubmit,handleModalForm}) => {
+    const {_id,college,country,email,name,phone,District} =items
     return (
         <div>
             <input type="checkbox" id="my-modal" className="modal-toggle" />
             <div className="modal ">
                 <div className="modal-box bg-blue-1">
                     <form onSubmit={handleSubmit(handleModalForm)}>
-                        <div>
-                            <label className="label">
-                                <span className="label-text text-white">last name</span>
-                            </label>
-                            <input {...register('lastname')} type="text" placeholder="last name" className="input bg-white text-black input-bordered w-full" />
+                        <div className='grid grid-cols-2 gap-3'>
+                            <div>
+                                <label className="label">
+                                    <span className="label-text text-white">name</span>
+                                </label>
+                                <input {...register('name')} type="text" placeholder={name} className="input input-sm bg-white text-black input-bordered w-full" />
+                            </div>
+                            <div>
+                                <label className="label">
+                                    <span className="label-text text-white">phone</span>
+                                </label>
+                                <input {...register('phone')} type="text" placeholder={phone} className="input input-sm bg-white text-black input-bordered w-full" />
+                            </div>
                         </div>
                         <div>
                             <label className="label">
-                                <span className="label-text text-white">last name</span>
+                                <span className="label-text text-white">email</span>
                             </label>
-                            <input {...register('lastname')} type="text" placeholder="last name" className="input bg-white text-black input-bordered w-full" />
+                            <input {...register('email')} type="text" placeholder={email} className="input bg-white input-sm text-black input-bordered w-full" />
                         </div>
                         <div>
                             <label className="label">
-                                <span className="label-text text-white">last name</span>
+                                <span className="label-text text-white">college</span>
                             </label>
-                            <input {...register('lastname')} type="text" placeholder="last name" className="input bg-white text-black input-bordered w-full" />
+                            <input {...register('college')} type="text" placeholder={college} className="input input-sm bg-white text-black input-bordered w-full" />
                         </div>
-                        <div>
-                            <label className="label">
-                                <span className="label-text text-white">last name</span>
-                            </label>
-                            <input {...register('lastname')} type="text" placeholder="last name" className="input bg-white text-black input-bordered w-full" />
+                        <div className='grid grid-cols-2 gap-2'>
+                            <div>
+                                <label className="label">
+                                    <span className="label-text text-white">district</span>
+                                </label>
+                                <input {...register('district')} type="text" placeholder={District} className="input input-sm bg-white text-black input-bordered w-full" />
+                            </div>
+                            <div>
+                                <label className="label">
+                                    <span className="label-text text-white">country</span>
+                                </label>
+                                <input {...register('country')} type="text" placeholder={country} className="input input-sm bg-white text-black input-bordered w-full" />
+                            </div>
                         </div>
-                    </form>
                     <div className="modal-action">
-                    <label htmlFor="my-modal" className="btn">x</label>
+                        <button className='btn btn-info btn-sm' type='submit'>oncick</button>
+                        <label htmlFor="my-modal" className="btn btn-warning btn-sm">close</label>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -8,8 +8,7 @@ import { TbListDetails } from 'react-icons/tb';
 
 const Showingdata = ({ item }) => {
     const { image, text, _id,displayName,userImage } = item
-    console.log(item)
-    return (
+    return(
         <div className=''>
             <div className='bg-slate-300 '>
                 <div className=' flex justify-between h-16 items-center mx-2'>
@@ -32,7 +31,7 @@ const Showingdata = ({ item }) => {
                     <i className=''><AiFillLike className='text-2xl'></AiFillLike></i>
                     <p>like</p>
                 </div>
-                <label htmlFor="my-modal-6" className='flex items-center'>
+                <label className='flex items-center'>
                     <i><BiMessageDetail className='text-2xl mr-1'></BiMessageDetail></i>
                     <p>comment</p>
                 </label>

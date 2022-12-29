@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { CallContext } from '../Contexting/Context';
-import { Navigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { Navigate, useLocation } from 'react-router-dom';
+import { CallContext } from '../Contexting/Context';
 
-
-// 408356244f0751ab0559a83c0ad89aaa
 
 const Adding = () => {
     const { User} = useContext(CallContext)
@@ -16,7 +14,7 @@ const Adding = () => {
         console.log(data)
         const fromData = new FormData()
         fromData.append('image', data.file[0])
-        fetch(`https://api.imgbb.com/1/upload?key=408356244f0751ab0559a83c0ad89aaa`,{
+        fetch(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`,{
             method:"POST",
             body:fromData
         })
@@ -30,7 +28,7 @@ const Adding = () => {
                         text: data.text
                     }
                     if(User && User.uid) {
-                       return fetch('http://localhost:5000/adding', {
+                       return fetch('https://thinking-server.vercel.app/adding', {
                             method: "POST",
                             headers: {
                                 "content-type":"application/json"
