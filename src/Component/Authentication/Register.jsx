@@ -32,7 +32,7 @@ const Register = () => {
                             if (item.success) {
                                 const userdata = {
                                     photoURL: item.data.url,
-                                    displayName: data.text
+                                    displayName:name
                                 }
                                 handleUserData(userdata)
                             }
