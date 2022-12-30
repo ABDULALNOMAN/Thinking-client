@@ -16,8 +16,8 @@ const Another = () => {
     const handleCommentAnother =(event) => {
         event.preventDefault()
         const commentData = {
-            userimage: User.photoURL,
-            username: User.displayName,
+            userimage: User?.photoURL,
+            username: User?.displayName,
             comment: event.target.comment.value,
             index:_id
         }
