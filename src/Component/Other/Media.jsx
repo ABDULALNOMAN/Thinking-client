@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
 import Mediadata from './Mediadata';
-import Modal from './Modal';
+import { useQuery } from '@tanstack/react-query';
 
 const Media = () => {
-    const datas = useLoaderData()
-    const [dataId, setDataId] = useState(null)
+    const { data:datas=[],refetch } = useQuery({
+        queryKey:["showing"],
+        queryFn: async() => {
+            const res = await fetch('https://thinking-server.vercel.app/media')
+            const data = res.json()
+            return data
+        }
+    })
     return (
         <div>
-            <div className='mb-8 bg-slate-300 mx-8 mt-8'>
-                {datas.map(data=><Mediadata key={data._id} setDataId={setDataId} data={data}></Mediadata>)}
+            <div className=' bg-slate-300 md:mx-8 md:mt-8'>
+                {datas.map(data=><Mediadata key={data._id} data={data} refetch={refetch}></Mediadata>)}
             </div>
-            <Modal dataId={dataId}></Modal>
         </div>
     );
 };

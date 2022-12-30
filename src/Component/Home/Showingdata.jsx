@@ -5,9 +5,6 @@ import { RiSendPlane2Fill } from 'react-icons/ri';
 import { FaBeer } from 'react-icons/fa';
 import { TbListDetails } from 'react-icons/tb';
 import { CallContext } from '../Contexting/Context';
-import Comments from './Comments';
-import { useQuery } from '@tanstack/react-query';
-import { data } from 'autoprefixer';
 
 const Showingdata = ({ item,refetch }) => {
     const { User } = useContext(CallContext)
@@ -34,21 +31,11 @@ const Showingdata = ({ item,refetch }) => {
                 refetch()
             })
     }
-    // const { data:commentdata=[],refetch } = useQuery({
-    //     queryKey:[],
-    //     queryFn:async()=>{
-    //         const res = await fetch('http://localhost:5000/dataComment')
-    //         const data = res.json()
-    //         return data
-    //     }
-    // })
-    // console.log(commentdata)
     const speicfic = commentBox?.find((data) => data.index == _id)
-    console.log(speicfic)
     return (
         <div className=''>
             <div className='bg-slate-300'>
-                <div className=' flex justify-between h-16 items-center mx-2'>
+                <div className=' flex justify-between h-14  items-center mx-2'>
                     <div className='flex items-center'>
                         <img className='mr-2 w-10 h-10 rounded-full border-2 border-blue-3' src={userImage} alt="image" />
                         <p>{displayName}</p>
@@ -89,8 +76,8 @@ const Showingdata = ({ item,refetch }) => {
                         <p>{speicfic?.comment}</p>
                     </div>
                 </div>
-                <p className='bg-blue-5 h-10'></p>
             </div>
+                <p className='bg-blue-5 h-10 '></p>
         </div>
     );
 };

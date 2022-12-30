@@ -13,7 +13,7 @@ const Showing = () => {
     })
     return (
         <div>
-            <div className='md:w-10/12 w-11/12 mx-auto mb-8 bg-slate-300 grid grid-cols-1 gap-6'>
+            <div className='md:w-10/12 w-11/12 mx-auto  bg-slate-300 grid grid-cols-1'>
                 {data.map((item) =><Showingdata key={item._id} item={item} refetch={refetch}></Showingdata>)}
             </div>
         </div>

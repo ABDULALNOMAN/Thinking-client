@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
-import { BiMessageDetail } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { FaBeer } from 'react-icons/fa';
 import { TbListDetails } from 'react-icons/tb';
+import { RiSendPlane2Fill } from 'react-icons/ri';
+import { CallContext } from '../Contexting/Context';
 
 
-const Mediadata = ({ data ,setDataId }) => {
-    const { image, text,_id,displayName,userImage } = data
+const Mediadata = ({ data,refetch }) => {
+    const {User}=useContext(CallContext)
+    const { image, text,_id,displayName,userImage,commentBox } = data
     const [liking, setLiking] = useState(false)
     const [count,setCount]=useState(1)
     useEffect(() => {
@@ -17,7 +19,32 @@ const Mediadata = ({ data ,setDataId }) => {
         else {
             setCount(count-1)
       }
-    },[liking])
+    }, [liking])
+
+
+    const handleCommentData = (event) => {
+        event.preventDefault()
+        console.log(event.target.comment.value)
+        const commentData = {
+            userimage: User.photoURL,
+            username: User.displayName,
+            comment: event.target.comment.value,
+            index:_id
+        }
+        fetch(`http://localhost:5000/update?id=${_id}`, {
+            method: "PUT",
+            headers: {
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(commentData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                refetch()
+            })
+    }
+    const speicfic = commentBox?.find((data) => data.index == _id)
     return (
         <div>
              <div className='bg-slate-300'>
@@ -36,20 +63,34 @@ const Mediadata = ({ data ,setDataId }) => {
             <div className='bg-blue-2'>
                 <img src={image} alt="" />
             </div>
-            <div className='flex justify-around py-2 h-14'>
+            <div className='flex justify-around py-2 h-14 items-center'>
                 <div className='flex items-center'>
                     <i className='' onClick={() => setLiking(!liking)}>{liking ? <AiFillLike className='text-2xl'></AiFillLike> : <AiOutlineLike className='text-2xl'></AiOutlineLike>}</i>
                     <p>like</p>
                 </div>
-                <label onClick={()=>setDataId(_id)} htmlFor="my-modal-6" className='flex items-center'>
-                    <i><BiMessageDetail className='text-2xl mr-1'></BiMessageDetail></i>
-                    <p>comment</p>
-                </label>
+                <div className=''>
+                    <form className='flex items-center' onSubmit={handleCommentData}>
+                        <input type="text" name='comment' className='input input-bordered input-sm w-full bg-white text-black' placeholder='Enter you comment' />
+                        <button><RiSendPlane2Fill className='text-2xl ml-1'></RiSendPlane2Fill></button>
+                    </form>
+                </div>
                 <div className='flex items-center '>
                     <Link to={`/another/${_id}`}><TbListDetails className='text-2xl mr-1'>details</TbListDetails></Link>
                     <p>details</p>
                 </div>
             </div>
+            <div className='bg-white'>
+                <div className={speicfic?`flex items-start border py-2 pl-2`:`py-0`}>
+                    <div>
+                        <img className={speicfic ? `w-8 h-8 rounded-full border-2 border-sky-500` : ``} src={speicfic?.userimage} alt="" />
+                    </div>
+                    <div className='ml-2 self-center'>
+                        <p className='font-bebes'>{speicfic?.username}</p>
+                        <p>{speicfic?.comment}</p>
+                    </div>
+                </div>
+            </div>
+            <p className='bg-blue-5 h-10 '></p>
         </div>
     );
 };

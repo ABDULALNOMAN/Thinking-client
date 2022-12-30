@@ -27,8 +27,7 @@ import Media from '../Other/Media'
              },
              {
                  path: '/media',
-                 element: <Media></Media>,
-                 loader:()=>fetch('https://thinking-server.vercel.app/media')
+                 element: <Media></Media>
              },
              {
                  path:'/another/:id',
