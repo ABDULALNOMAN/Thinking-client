@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Comments = ({ data }) => {
-    console.log(data)
     const {username,userimage,comment}= data
     return (
         <div>

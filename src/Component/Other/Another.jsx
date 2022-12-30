@@ -1,17 +1,19 @@
-import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import { AiFillLike } from 'react-icons/ai';
-import { RiSendPlane2Fill } from 'react-icons/ri';import { FaBeer } from 'react-icons/fa';
+import React, { useContext, useState } from 'react';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
+import { FaBeer } from 'react-icons/fa';
+import { RiSendPlane2Fill } from 'react-icons/ri';
 import { TbListDetails } from 'react-icons/tb';
-import Comments from './Comments';
+import { useLoaderData } from 'react-router-dom';
 import { CallContext } from '../Contexting/Context';
+import Comments from './Comments';
 
 const Another = () => {
     const {User}=useContext(CallContext)
     const datas = useLoaderData()
-    const { image, text, _id, displayName, userImage, commentBox } = datas
-    console.log(commentBox)
-    const handleCommentAnother = (event) => {
+    const { image, text, _id, displayName, userImage, commentBox,like } = datas
+    const [comment, setComment] = useState({})
+    const allData = [...commentBox,comment]
+    const handleCommentAnother =(event) => {
         event.preventDefault()
         const commentData = {
             userimage: User.photoURL,
@@ -19,7 +21,7 @@ const Another = () => {
             comment: event.target.comment.value,
             index:_id
         }
-        fetch(`http://localhost:5000/update?id=${_id}`, {
+        fetch(`https://thinking-server.vercel.app/update?id=${_id}`, {
             method: "PUT",
             headers:{
                 'content-type':'application/json'
@@ -28,8 +30,38 @@ const Another = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                refetch()
+                if (data.acknowledged){
+                    console.log(data)
+                    setComment(commentData)
+                }
+            })
+    }
+
+    const [liking, setLiking] = useState(false)
+    const [count,setCount]=useState(0)
+    const handleLikeButtonClick = (id) => {
+        if (liking) {
+            setCount(count-1)
+        }
+        else {
+            setCount(count+1)
+        }
+        setLiking(!liking)
+        const datashow = {
+            like:count
+        }
+        fetch(`https://thinking-server.vercel.app/likecount?id=${id}`,{
+            method: 'PUT',
+            headers: {
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(datashow)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    console.log(data)
+                }
             })
     }
     return (
@@ -51,10 +83,10 @@ const Another = () => {
                 <img className='h-96 w-full' src={image} alt="" />
             </div>
             <div className='flex justify-around py-2 bg-slate-300 h-14 items-center'>
-                <div className='flex items-center'>
-                    <i className=''><AiFillLike className='text-2xl'></AiFillLike></i>
+                <button onClick={()=>handleLikeButtonClick(_id)} className='flex items-center'>
+                    <i className=''>{liking ? <AiOutlineLike className='text-2xl'></AiOutlineLike>:<AiFillLike className='text-2xl'></AiFillLike>}</i>
                     <p>like</p>
-                </div>
+                </button>
                 <div className=''>
                     <form className='flex items-center' onSubmit={handleCommentAnother}>
                         <input type="text" name='comment' className='input input-bordered input-sm w-full bg-white text-black' placeholder='Enter you comment' />
@@ -67,7 +99,7 @@ const Another = () => {
                 </div>
             </div>
             <div>
-                {commentBox?.length && commentBox?.map(data=><Comments key={data._id} data={data}></Comments>) }
+                {allData?.map((data,index)=><Comments key={index} data={data}></Comments>) }
             </div>
         </div>
     );

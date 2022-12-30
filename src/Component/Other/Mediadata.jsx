@@ -1,37 +1,53 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 import { FaBeer } from 'react-icons/fa';
-import { TbListDetails } from 'react-icons/tb';
 import { RiSendPlane2Fill } from 'react-icons/ri';
+import { TbListDetails } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 import { CallContext } from '../Contexting/Context';
 
 
 const Mediadata = ({ data,refetch }) => {
     const {User}=useContext(CallContext)
-    const { image, text,_id,displayName,userImage,commentBox } = data
+    const { image, text, _id, displayName, userImage, commentBox,like } = data
+    
     const [liking, setLiking] = useState(false)
-    const [count,setCount]=useState(1)
-    useEffect(() => {
+    const [count,setCount]=useState(0)
+    const handleLikeButtonClick = (id) => {
         if (liking) {
-          setCount(count+1)
-      }
-        else {
             setCount(count-1)
-      }
-    }, [liking])
-
-
+        }
+        else {
+            setCount(count+1)
+        }
+        setLiking(!liking)
+        const datashow = {
+            like:count
+        }
+        fetch(`https://thinking-server.vercel.app/likecount?id=${id}`,{
+            method: 'PUT',
+            headers: {
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(datashow)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    console.log(data)
+                    refetch()
+                }
+            })
+    }
     const handleCommentData = (event) => {
         event.preventDefault()
-        console.log(event.target.comment.value)
         const commentData = {
             userimage: User.photoURL,
             username: User.displayName,
             comment: event.target.comment.value,
             index:_id
         }
-        fetch(`http://localhost:5000/update?id=${_id}`, {
+        fetch(`https://thinking-server.vercel.app/update?id=${_id}`, {
             method: "PUT",
             headers: {
                 'content-type':'application/json'
@@ -64,10 +80,10 @@ const Mediadata = ({ data,refetch }) => {
                 <img src={image} alt="" />
             </div>
             <div className='flex justify-around py-2 h-14 items-center'>
-                <div className='flex items-center'>
-                    <i className='' onClick={() => setLiking(!liking)}>{liking ? <AiFillLike className='text-2xl'></AiFillLike> : <AiOutlineLike className='text-2xl'></AiOutlineLike>}</i>
-                    <p>like</p>
-                </div>
+                <button onClick={()=>handleLikeButtonClick(_id)} className='flex items-center'>
+                    <i className=''>{liking ? <AiOutlineLike className='text-2xl'></AiOutlineLike>:<AiFillLike className='text-2xl'></AiFillLike>}</i>
+                    <p>like:<span className='font-bebes'>{like}</span></p>
+                </button>
                 <div className=''>
                     <form className='flex items-center' onSubmit={handleCommentData}>
                         <input type="text" name='comment' className='input input-bordered input-sm w-full bg-white text-black' placeholder='Enter you comment' />
